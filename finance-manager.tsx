@@ -5,7 +5,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 interface Transaction {
   id: number
   type: 'income' | 'expense'
-  amount: number
+  amount:                       
   category: string
   date: string
   description: string
@@ -367,7 +367,7 @@ export default function FinanceManager() {
                   <h3 className="text-lg font-bold">{stock.symbol}</h3>
                   <p className="text-gray-500">Quantity: {stock.quantity}</p>
                   <p className="text-gray-500">Current Price: ${stock.price.toFixed(2)}</p>
-                  <p className="text-gray-500">Total Value: ${(stock.quantity * stock.price).toFixed(2)}</p>
+                  <p className="text-gray-500">Value: ${(stock.quantity * stock.price).toFixed(2)}</p>
                   <div className="mt-4">
                     <LineChart
                       width={500}
@@ -385,3 +385,12 @@ export default function FinanceManager() {
                       <YAxis />
                       <Tooltip />
                       <Legend />
+                      <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />
+                    </LineChart>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
