@@ -295,7 +295,7 @@ class FinanceTracker(QWidget):
         except FileNotFoundError:
             self.data = pd.DataFrame(columns=["Date", "Type", "Account", "Amount", "Source/Category", "Notes"])
             QMessageBox.information(self, "No Data File", "No transactions file found. Please add your first transaction.")
-            self.add_transaction_from_dialog()
+            self.add_transaction_interactively()
 
     def add_transaction_interactively(self):
         dialog = QDialog(self)
@@ -348,7 +348,7 @@ class FinanceTracker(QWidget):
             try:
                 amount = float(amount)
                 new_row = pd.Series([date, _type, account, amount, source_category, notes], index=self.data.columns)
-                self.data = self.data_.append(new_row, ignore_index=True)
+                self.data = self.data.append(new_row, ignore_index=True)
                 self.save_data()
                 self.update_table()
                 dialog.accept()
