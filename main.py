@@ -347,8 +347,8 @@ class FinanceTracker(QWidget):
         if amount:
             try:
                 amount = float(amount)
-                new_row = pd.Series([date, _type, account, amount, source_category, notes], index=self.data.columns)
-                self.data = self.data.append(new_row, ignore_index=True)
+                new_row = pd.DataFrame([[date, _type, account, amount, source_category, notes]], columns=self.data.columns)
+                self.data = pd.concat([self.data, new_row], ignore_index=True)
                 self.save_data()
                 self.update_table()
                 dialog.accept()
